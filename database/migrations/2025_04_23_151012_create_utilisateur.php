@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('adresse');
-            $table->unsignedBigInteger('id_command');
-            $table->foreign('id_command')->references('id')->on('commande')->onDelete('cascade');
             $table->timestamps();
         });
     }
