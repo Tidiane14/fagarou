@@ -51,4 +51,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rdonnance()
+    {
+        return $this->hasMany(Ordonnance::class);
+
+    }
+
+    public function commande()
+    {
+        return $this->hasMany(Commande::class);
+
+    }
 }
