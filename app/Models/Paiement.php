@@ -12,4 +12,7 @@ class Paiement extends Model
         'mode_paiement',
         'statut_paiement',
     ];
+    public function commande(){
+        return $this->hasMany(Commande::class);
+    }
 }
