@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stocks', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_medicament');
-            $table->integer('quantity')->default(0);
-            $table->date('date_mis_a_jour')->nullable();
             $table->timestamps();
-            $table->foreign('id_pharmacies')->references('id')->on('pharmacies')->onDelete('cascade');
-
         });
     }
 
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stocks');
+        Schema::dropIfExists('commandes');
     }
 };
