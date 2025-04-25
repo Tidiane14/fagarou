@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_pharmacie');
             $table->integer('quantity')->default(0);
             $table->date('date_mis_a_jour')->nullable();
             $table->timestamps();
