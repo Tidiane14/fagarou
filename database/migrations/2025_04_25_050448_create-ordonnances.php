@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('id_medoc');
-            $table->foreign('id_medoc')->references('id')->on('medocs')->onDelete('cascade');
+            $table->string('date_creation');
+            $table->string('imageUrl')->nullable();
             $table->timestamps();
         });
     }
