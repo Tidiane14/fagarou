@@ -18,6 +18,6 @@ class Stock extends Model
     }
     public function medicaments()
     {
-        return $this->hasMany(Medicament::class, 'id_stock');
+        return $this->hasMany(Medicament::class);
     }
 }
