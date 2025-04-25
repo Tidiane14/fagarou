@@ -11,14 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ordonnances', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->string('date_creation');
-            $table->string('imageUrl')->nullable();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id_pharmacie');
+            $table->foreign('id_pharmacie')->references('id')->on('pharmacies')->onDelete('cascade');
+            $table->unsignedBigInteger('id_paiement');
+            $table->foreign('id_paiement')->references('id')->on('paiements')->onDelete('cascade');
+            $table->string('statut')->default('en attente');
+            $table->string('montant');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ordonnances');
+        //
     }
 };
