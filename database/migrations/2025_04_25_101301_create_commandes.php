@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paiements', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_commande');
-            $table->string('montant');
-            $table->string('mode_paiement');
-            $table->string('statut_paiement');
-            $table->foreign('id_commande')->references('id')->on('commandes')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('commandes');
     }
 };
