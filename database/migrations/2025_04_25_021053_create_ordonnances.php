@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('date_creation');
             $table->string('imageUrl')->nullable();
-            $table->unseignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
