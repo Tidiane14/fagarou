@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('quantity')->default(0);
             $table->date('date_mis_a_jour')->nullable();
             $table->timestamps();
-            $table->foreign('id_pharmacies')->references('id')->on('pharmacies')->onDelete('cascade');
+            $table->foreign('id_pharmacie')->references('id')->on('pharmacies')->onDelete('cascade');
 
         });
     }
