@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->string('date_creation');
             $table->string('imageUrl')->nullable();
+            $table->unsignedBigInteger('id_medoc');
+            $table->foreign('id_medoc')->references('id')->on('medicaments')->onDelete('cascade');
             $table->timestamps();
         });
     }
