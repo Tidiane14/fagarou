@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_paiement');
+            $table->string('statut')->default('en attente');
+            $table->string('montant');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_paiement')->references('id')->on('paiements')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,3 +31,5 @@ return new class extends Migration
         Schema::dropIfExists('commandes');
     }
 };
+
+

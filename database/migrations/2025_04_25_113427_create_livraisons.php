@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('livraisons', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_commande');
+            $table->unsignedBigInteger('id_livreur');
+            $table->foreign('id_livreur')->references('id')->on('livreurs')->onDelete('cascade');
+            $table->string('adresse_livraison');
+            $table->string('date_livraison');
+            $table->string('statut_livraison')->default('en attente');
+            $table->string('frais_livraison')->nullable();
+            $table->foreign('id_commande')->references('id')->on('commandes')->onDelete('cascade');
             $table->timestamps();
         });
     }
