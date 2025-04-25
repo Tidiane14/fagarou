@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('prenom');
             $table->date('date_naissance');
-            $table->integer('numTel');
-            $table->string('adress');
-            $table->string('photo');
+            $table->string('adresse');
+            $table->string('telephone');
+            $table->string('photo')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-
+            //
         });
     }
 };
