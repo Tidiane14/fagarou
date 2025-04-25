@@ -13,12 +13,6 @@ return new class extends Migration
     {
         Schema::create('medicaments', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('description');
-            $table->double('prix');
-            $table->string('categorie');
-            $table->string('image');
-            $table->foreignId('id_stock')->constrained('stock')->onDelete('cascade');
             $table->timestamps();
         });
     }
