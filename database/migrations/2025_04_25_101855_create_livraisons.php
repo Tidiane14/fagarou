@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -17,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('prenom');
-            $table->date('date_naissance');
-            $table->string('adresse');
-            $table->string('telephone');
-            $table->string('photo')->nullable();
+        Schema::create('livraisons', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -31,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('livraisons');
     }
 };

@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medicament', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('description');
-            $table->double('prix');
-            $table->string('categorie');
-            $table->string('image')->nullable();
-            $table->foreignId('id_stock')->constrained('stock')->onDelete('cascade');
             $table->timestamps();
-
         });
     }
 
@@ -29,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medicament');
+        Schema::dropIfExists('commandes');
     }
 };
