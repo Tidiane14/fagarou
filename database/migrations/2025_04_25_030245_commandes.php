@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->string('montant');
             $table->timestamps();
         });
-
     }
 
     /**
