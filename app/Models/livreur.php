@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class livreur extends Model
+class Livreur extends Model
 {
     protected $fillable = [
         'nom',
@@ -23,7 +23,7 @@ class livreur extends Model
     }
     public function livraison()
     {
-        return $this->hasMany(livraison::class);
+        return $this->hasMany(Livraison::class);
     }
 
 }
