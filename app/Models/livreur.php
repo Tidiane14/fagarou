@@ -23,7 +23,7 @@ class livreur extends Model
     }
     public function livraison()
     {
-        return $this->hasMany(livraison::class);
+        return $this->hasMany(Livraison::class);
     }
 
 }
