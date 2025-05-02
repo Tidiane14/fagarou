@@ -15,13 +15,63 @@
             <p>Rejoignez Fagarou pour accéder à tous nos services.</p>
         </div>
 
-        <form method="POST" action="{{ route('register') }}" style="padding: 0 20px 20px;">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" style="padding: 0 20px 20px;">
             @csrf
 
             <div class="form-group">
-                <label for="name">Nom complet</label>
+                <label for="name">Nom</label>
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                 @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" autocomplete="prenom">
+                @error('prenom')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="date_naissance">Date de naissance</label>
+                <input id="date_naissance" type="date" class="form-control @error('date_naissance') is-invalid @enderror" name="date_naissance" value="{{ old('date_naissance') }}">
+                @error('date_naissance')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse</label>
+                <input id="adresse" type="text" class="form-control @error('adresse') is-invalid @enderror" name="adresse" value="{{ old('adresse') }}">
+                @error('adresse')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Téléphone</label>
+                <input id="telephone" type="text" class="form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}">
+                @error('telephone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Photo de profil</label>
+                <input id="photo" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                @error('photo')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -64,5 +114,7 @@
         </div>
     </div>
 </div>
+
 @endsection
+
 
