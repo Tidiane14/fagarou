@@ -22,7 +22,16 @@ class LivreursRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => 'le nom est obligatoire',
+            'prenom' => 'le prenom est bligatoire',
+            'date_naissance' => 'la date de naissance est obligatoire',
+            'adresse' => 'l\'adresse est obligatoire',
+            'telephone' => 'le telephone est obligatoire',
+            'photo' => 'l\'image n\'est pas obligatoire',
+            'email' => 'l\'email est obligatoire',
+            'password' => 'le mot de passe ne peut contenir que 8 caracteres',
+            'telephone' => 'le telephone est obligatoire',
+            'photo' => 'la photo n\'est pas obligatoire',
         ];
     }
 }
