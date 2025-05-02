@@ -5,9 +5,9 @@
 <div class="login-container">
     <div class="login-card">
         <div class="logo-container">
-            <img src="{{ asset('images/fagarou-logo.png') }}" alt="Fagarou Logo" class="logo">
+            <img src="{{ asset('images/bb.jpg') }}" alt="Fagarou Logo" class="logo">
             <span class="tagline">Ma Santé Fagarou</span>
-            <a href="{{ route('login') }}" class="close-btn">×</a>
+            <a href="{{ route('login') }}" class="close-btn" title="Retour à la connexion">×</a>
         </div>
         
         <div class="welcome-text">
@@ -57,63 +57,12 @@
                 <button type="submit" class="btn btn-primary">
                     S'INSCRIRE
                 </button>
-                
-                <div class="text-center" style="margin-top: 15px;">
-                    <p>Vous avez déjà un compte? <a href="{{ route('login') }}" style="color: var(--primary-color); text-decoration: none;">Se connecter</a></p>
-                </div>
             </div>
         </form>
+        <div class="text-center" style="margin-top: 15px;">
+            <p>Vous avez déjà un compte ? <a href="{{ route('login') }}" style="color: var(--primary-color); text-decoration: none;">Se connecter</a></p>
+        </div>
     </div>
 </div>
 @endsection
 
-{{-- Ajoutez ce code CSS au fichier app.blade.php à l'intérieur du style --}}
-/* Styles pour les formulaires */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #666;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.invalid-feedback {
-    color: #dc3545;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-/* Pour les messages flash */
-.alert {
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
