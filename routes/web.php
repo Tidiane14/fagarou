@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\user\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -29,6 +30,14 @@ Route::post('/register', [RegisterController::class, 'register']);
 // Route d'accueil après connexion
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
+
 Route::get('/ordonnance ', function () {
     return view('ordonnances');
 })->name('ordonance');
+
+
+
+Route::get('/administrateur', function () {
+    return view('admin.administrateur');
+})->name('login');
+
