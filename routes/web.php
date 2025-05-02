@@ -31,6 +31,11 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 
+Route::get('/ordonnance ', function () {
+    return view('ordonnances');
+})->name('ordonance');
+
+
 
 Route::get('/administrateur', function () {
     return view('admin.administrateur');
