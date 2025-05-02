@@ -14,22 +14,25 @@ use App\Http\Controllers\Auth\RegisterController;
 //     return view('auth.login');
 // })->name('login');
 
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('register');
+//  Route::get('/register', function () {
+//      return view('auth.register');
+//  });
 
 // Routes d'authentification
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Routes d'inscription
+// Routes d'inscription (GET)
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+// Routes d'inscription (POST)
 Route::post('/register', [RegisterController::class, 'register']);
 
 // Route d'accueil après connexion
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
-
+//Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 
 
 Route::get('/administrateur', function () {
