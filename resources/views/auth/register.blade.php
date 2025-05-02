@@ -5,7 +5,7 @@
 <div class="login-container">
     <div class="login-card">
         <div class="logo-container">
-            <img src="{{ asset('images/fagarou-logo.png') }}" alt="Fagarou Logo" class="logo">
+            <img src="{{ asset('images/bb.jpg') }}" alt="Fagarou Logo" class="logo">
             <span class="tagline">Ma Santé Fagarou</span>
             <a href="{{ route('login') }}" class="close-btn">×</a>
         </div>
@@ -15,13 +15,63 @@
             <p>Rejoignez Fagarou pour accéder à tous nos services.</p>
         </div>
 
-        <form method="POST" action="{{ route('register') }}" style="padding: 0 20px 20px;">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" style="padding: 0 20px 20px;">
             @csrf
 
             <div class="form-group">
-                <label for="name">Nom complet</label>
+                <label for="name">Nom</label>
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                 @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input id="prenom" type="text" class="form-control @error('prenom') is-invalid @enderror" name="prenom" value="{{ old('prenom') }}" autocomplete="prenom">
+                @error('prenom')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="date_naissance">Date de naissance</label>
+                <input id="date_naissance" type="date" class="form-control @error('date_naissance') is-invalid @enderror" name="date_naissance" value="{{ old('date_naissance') }}">
+                @error('date_naissance')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse</label>
+                <input id="adresse" type="text" class="form-control @error('adresse') is-invalid @enderror" name="adresse" value="{{ old('adresse') }}">
+                @error('adresse')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Téléphone</label>
+                <input id="telephone" type="text" class="form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}">
+                @error('telephone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Photo de profil</label>
+                <input id="photo" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                @error('photo')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -66,54 +116,3 @@
     </div>
 </div>
 @endsection
-
-{{-- Ajoutez ce code CSS au fichier app.blade.php à l'intérieur du style --}}
-/* Styles pour les formulaires */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #666;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.invalid-feedback {
-    color: #dc3545;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-/* Pour les messages flash */
-.alert {
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
