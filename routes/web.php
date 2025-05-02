@@ -28,3 +28,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Route d'accueil après connexion
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+Route::get('/ordonnance ', function () {
+    return view('ordonnances');
+})->name('ordonance');
