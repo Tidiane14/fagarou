@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Livraison;
 use Illuminate\Database\Eloquent\Model;
 
-class Commade extends Model
+class Commande extends Model
 {
     protected $fillable=[
         'statut',
@@ -26,5 +27,9 @@ class Commade extends Model
     public function paiement()
     {
         return $this->belongsTo(Paiement::class, 'id_paiement');
+    }
+    public function livraison()
+    {
+        return $this->hasMany(Livraison::class);
     }
 }

@@ -38,6 +38,6 @@ class Medicament extends Model
 
     public function ordonnance()
     {
-        return $this->hasMany(Ordonnance::class, 'id_ordonnance');
+        return $this->hasMany(Ordonnance::class);
     }
 }
