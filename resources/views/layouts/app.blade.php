@@ -412,14 +412,3 @@
         .nav-item.active {
             color: var(--primary-color);
         }
-    </style>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-</head>
-<body>
-    <div id="app">
-        @yield('content')
-    </div>
-</body>
-</html>
