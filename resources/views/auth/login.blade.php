@@ -212,7 +212,7 @@
             </div>
             
             <!-- Nouveaux champs de saisie pour la connexion -->
-            <form class="login-form" action="{{ route('loginusers') }}" method="POST">
+            <form class="login-form" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">Email ou numéro de téléphone</label>
