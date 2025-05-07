@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\LivreurController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,4 +30,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Route d'accueil après connexion
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+// Routes pour livreur
+Route::get('/livreur/create', [LivreurController::class, 'create'])->name('livreur.create');
+Route::post('/livreur/store', [LivreurController::class, 'store'])->name('livreur.store');
 
