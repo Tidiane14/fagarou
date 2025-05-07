@@ -24,9 +24,9 @@ Route::delete('/medicaments/{id}', [MedicamentController::class, 'destroy'])->na
 
 
 
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('register');
+//  Route::get('/register', function () {
+//      return view('auth.register');
+//  });
 
 
 
@@ -37,14 +37,24 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
+
 // Routes d'inscription
+// Routes d'inscription (GET)
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+// Routes d'inscription (POST)
 Route::post('/register', [RegisterController::class, 'register']);
 
 
 
 // Route d'accueil après connexion
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+//Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
+Route::get('/ordonnance ', function () {
+    return view('ordonnances');
+})->name('ordonance');
 
 
 
