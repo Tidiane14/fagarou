@@ -8,6 +8,64 @@ use App\Models\Medicament;
 
 class MedicamentController extends Controller
 {
+
+    /**Afficher le formulaire d'ajout de médicaments */
+    public function create()
+{
+    return view('medicament.create');
+    }
+    public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nom_medicament' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'prix' => 'required|numeric',
+        'quantite' => 'required|integer',
+        'image' => 'nullable|string',
+        // ajoute les autres champs ici...
+    ]);
+
+    Medicament::create($validated);
+
+    return redirect()->route('medicaments.index')->with('success', 'Médicament ajouté avec succès.');
+
+    }
+
+    public function edit($id)
+{
+    $medicament = Medicament::findOrFail($id);
+    return view('medicament.edit', compact('medicament'));
+}
+
+    public function update(Request $request, $id)
+    {
+        $medicament = Medicament::findOrFail($id);
+
+        $validated = $request->validate([
+            'nom_medicament' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'prix' => 'required|numeric',
+            'quantite' => 'required|integer',
+            'image' => 'nullable|string',
+            // autres champs
+        ]);
+
+        $medicament->update($validated);
+
+        return redirect()->route('medicaments.index')->with('success', 'Médicament mis à jour avec succès.');
+    }
+
+    public function destroy($id)
+{
+    $medicament = Medicament::findOrFail($id);
+    $medicament->delete();
+
+    return redirect()->route('medicaments.index')->with('success', 'Médicament supprimé avec succès.');
+   }
+
+
+
+
     /**
      * Afficher la liste des médicaments
      */

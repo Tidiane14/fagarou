@@ -1,62 +1,263 @@
+```php
 @extends('layouts.app')
 
 @section('styles')
 <style>
-    .card-product {
-        transition: transform 0.3s, box-shadow 0.3s;
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        color: #333;
     }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .card-product {
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 20px;
+    }
+    
     .card-product:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
-    .btn-quick-add {
-        opacity: 0.9;
-        transition: opacity 0.3s;
+    
+    .product-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
     }
-    .btn-quick-add:hover {
-        opacity: 1;
+    
+    .card-body {
+        padding: 20px;
+        text-align: center;
     }
-    .product-badge {
-        padding: 0.35rem 0.65rem;
-        font-size: 0.75rem;
-        font-weight: 600;
+    
+    .card-footer {
+        padding: 0 20px 20px;
+    }
+    
+    h1, h2, h3, h5, h6 {
+        color: #2d3748;
+    }
+    
+    .tagline {
+        color: #4a5568;
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
     }
-    .star-rating {
-        color: #FFD700;
+    
+    .btn-primary {
+        background-color: #4299e1;
+        color: white;
     }
+    
+    .btn-primary:hover {
+        background-color: #3182ce;
+    }
+    
+    .btn-outline {
+        background-color: transparent;
+        border: 1px solid #4299e1;
+        color: #4299e1;
+    }
+    
+    .btn-outline:hover {
+        background-color: rgba(66, 153, 225, 0.1);
+    }
+    
+    .search-bar {
+        display: flex;
+        margin-bottom: 30px;
+    }
+    
+    .search-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px 0 0 8px;
+        font-size: 16px;
+    }
+    
+    .search-button {
+        background-color: #4299e1;
+        color: white;
+        border: none;
+        border-radius: 0 8px 8px 0;
+        padding: 0 20px;
+        cursor: pointer;
+    }
+    
+    .category-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .category-filter {
+        background-color: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 30px;
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .category-filter.active {
+        background-color: #4299e1;
+        color: white;
+        border-color: #4299e1;
+    }
+    
+    .sort-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .sort-select {
+        padding: 8px 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background-color: white;
+    }
+    
+    .product-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .badge-new {
+        background-color: #2d3748;
+        color: white;
+    }
+    
+    .badge-bestseller {
+        background-color: #e53e3e;
+        color: white;
+    }
+    
+    .badge-promo {
+        background-color: #38a169;
+        color: white;
+    }
+    
+    .badge-eco {
+        background-color: #2e7d32;
+        color: white;
+    }
+    
+    .price {
+        font-weight: bold;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    
     .original-price {
         text-decoration: line-through;
         color: #6c757d;
-        font-size: 0.9rem;
+        font-size: 14px;
+        margin-right: 8px;
     }
+    
     .sale-price {
-        color: #198754;
-        font-weight: 700;
+        color: #38a169;
     }
-    .banner-top {
-        background-color: #f8f9fa;
-        border-bottom: 1px solid #e9ecef;
+    
+    .star-rating {
+        color: #FFD700;
+        margin-bottom: 5px;
     }
-    .banner-accent {
-        background-color: #212529;
+    
+    .review-count {
+        color: #4a5568;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .banner {
+        background-color: #4299e1;
         color: white;
+        text-align: center;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
     }
-    .category-filter {
-        border-radius: 30px;
-        font-size: 0.9rem;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        padding: 0.4rem 1rem;
-        border: 1px solid #dee2e6;
-        transition: all 0.3s;
+    
+    .newsletter {
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin: 40px 0;
+        text-align: center;
     }
-    .category-filter:hover, .category-filter.active {
-        background-color: #212529;
+    
+    .newsletter-form {
+        display: flex;
+        margin-top: 20px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .newsletter-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px 0 0 8px;
+        font-size: 16px;
+    }
+    
+    .newsletter-button {
+        background-color: #4299e1;
         color: white;
-        border-color: #212529;
+        border: none;
+        border-radius: 0 8px 8px 0;
+        padding: 0 20px;
+        cursor: pointer;
+        font-weight: bold;
     }
+    
+    .featured-section {
+        margin-top: 40px;
+        text-align: center;
+    }
+    
+    .featured-heading {
+        margin-bottom: 30px;
+    }
+    
     .wishlist-icon {
         position: absolute;
         top: 10px;
@@ -69,72 +270,70 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.3s;
-        opacity: 0.8;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    .wishlist-icon:hover {
-        opacity: 1;
-        transform: scale(1.1);
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    
+    .logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .tagline {
+        margin-left: 12px;
+        font-weight: bold;
+        color: #4a5568;
     }
 </style>
 @endsection
 
 @section('content')
-<!-- Top Promotional Banner -->
-<div class="banner-top py-2 text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <p class="mb-0"><i class="fas fa-truck me-2"></i> Livraison GRATUITE pour les commandes de plus de 50€</p>
-            </div>
-        </div>
-    </div>
+<!-- Banner -->
+<div class="banner">
+    <h3>🎉 15% DE RÉDUCTION SUR VOTRE PREMIÈRE COMMANDE • CODE: BIENVENUE15</h3>
 </div>
 
-<!-- Secondary Banner -->
-<div class="banner-accent py-3 text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h5 class="mb-0">🎉 15% DE RÉDUCTION SUR VOTRE PREMIÈRE COMMANDE • CODE: BIENVENUE15</h5>
-            </div>
-        </div>
+<div class="container">
+    <!-- Header with Logo -->
+    <div class="logo-container">
+        <img src="{{ asset('images/bb.jpg') }}" alt="Fagarou Logo" class="logo">
+        <span class="tagline">Ma Santé Fagarou</span>
     </div>
-</div>
 
-<div class="container py-5">
     <!-- Header Section -->
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <h1 class="fw-bold mb-2">Nos Produits</h1>
-            <p class="text-muted">Découvrez notre gamme de produits de beauté naturels et efficaces.</p>
-        </div>
-        <div class="col-md-4 text-md-end">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Rechercher un produit..." id="searchProduct">
-                <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
+    <h1>Nos Médicaments</h1>
+    <p class="tagline">Découvrez notre gamme de produits pour votre santé et bien-être.</p>
+    
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" class="search-input" id="searchProduct" placeholder="Rechercher un médicament...">
+        <button class="search-button">
+            <i class="fas fa-search"></i>
+        </button>
     </div>
-
+    
     <!-- Category Filters -->
-    <div class="mb-4 mt-2">
-        <h6 class="fw-bold mb-2">Filtrer par catégorie:</h6>
-        <div>
-            <button class="btn category-filter active" data-category="all">Tous</button>
-            <button class="btn category-filter" data-category="cleanse">Nettoyants</button>
-            <button class="btn category-filter" data-category="hydrate">Hydratants</button>
-            <button class="btn category-filter" data-category="treat">Traitements</button>
-            <button class="btn category-filter" data-category="mask">Masques</button>
-        </div>
+    <div class="category-filters">
+        <button class="category-filter active" data-category="all">Tous</button>
+        <button class="category-filter" data-category="cleanse">Antibiotiques</button>
+        <button class="category-filter" data-category="hydrate">Anti-douleurs</button>
+        <button class="category-filter" data-category="treat">Vitamines</button>
+        <button class="category-filter" data-category="mask">Digestion</button>
     </div>
-
+    
     <!-- Sorting Options -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <p class="mb-0"><span id="productCount">8</span> produits</p>
-        <div class="d-flex align-items-center">
-            <label class="me-2 text-nowrap">Trier par:</label>
-            <select class="form-select form-select-sm" style="width: auto;">
+    <div class="sort-container">
+        <p><span id="productCount">8</span> produits</p>
+        <div>
+            <label>Trier par:</label>
+            <select class="sort-select">
                 <option>Recommandés</option>
                 <option>Prix: Croissant</option>
                 <option>Prix: Décroissant</option>
@@ -143,152 +342,154 @@
             </select>
         </div>
     </div>
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    
+    <!-- Products Grid -->
+    <div class="row">
         @php
             $produits = [
                 [
-                    'nom' => 'DEEP DOUBLE CLEANSE DUO',
-                    'description' => 'melt makeup + deep-clean',
-                    'prix' => 2900,
-                    'ancien_prix' => 3200,
-                    'image' => 'https://via.placeholder.com/300x300?text=Deep+Cleanse',
-                    'etat' => 'nouveau',
-                    'note' => 0,
-                    'reviews' => 0,
-                    'categorie' => 'cleanse',
-                    'tags' => ['bestseller'],
-                ],
-                [
-                    'nom' => 'GENTLE DOUBLE CLEANSE DUO',
-                    'description' => 'melt makeup + gently cleanse',
-                    'prix' => 2900,
-                    'ancien_prix' => 3200,
-                    'image' => 'https://via.placeholder.com/300x300?text=Gentle+Cleanse',
-                    'etat' => 'nouveau',
-                    'note' => 0,
-                    'reviews' => 0,
-                    'categorie' => 'cleanse',
-                    'tags' => [],
-                ],
-                [
-                    'nom' => 'GREEN CLEAN CLEANSING BALM',
-                    'description' => 'makeup + SPF melting cleansing balm',
-                    'prix' => 1800,
-                    'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Green+Clean',
-                    'etat' => '',
-                    'note' => 4.9,
-                    'reviews' => 589,
-                    'categorie' => 'cleanse',
-                    'tags' => ['bestseller', 'eco'],
-                ],
-                [
-                    'nom' => 'GREEN CLEAN FRAGRANCE-FREE CLEANSING BALM',
-                    'description' => 'fragrance-free makeup + SPF melting cleansing balm',
-                    'prix' => 1800,
-                    'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Fragrance+Free',
-                    'etat' => '',
-                    'note' => 4.9,
-                    'reviews' => 72,
-                    'categorie' => 'cleanse',
-                    'tags' => ['eco'],
-                ],
-                [
-                    'nom' => 'AVOCADO CERAMIDE MOISTURE BARRIER CREAM',
-                    'description' => 'rich moisturizer that strengthens skin barrier',
-                    'prix' => 2200,
-                    'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Avocado+Cream',
-                    'etat' => 'nouveau',
-                    'note' => 4.7,
-                    'reviews' => 128,
-                    'categorie' => 'hydrate',
-                    'tags' => ['bestseller'],
-                ],
-                [
-                    'nom' => 'PLUM PLUMP HYALURONIC ACID SERUM',
-                    'description' => 'hydrating serum with 5 weights of hyaluronic acid',
-                    'prix' => 2100,
-                    'ancien_prix' => 2500,
-                    'image' => 'https://via.placeholder.com/300x300?text=Plum+Serum',
+                    'nom' => 'AMOXICILLINE 500mg',
+                    'description' => 'Antibiotique à large spectre',
+                    'prix' => 1200,
+                    'ancien_prix' => 1500,
+                    'image' => 'https://via.placeholder.com/300x300?text=Amoxicilline',
                     'etat' => '',
                     'note' => 4.8,
-                    'reviews' => 432,
+                    'reviews' => 324,
+                    'categorie' => 'cleanse',
+                    'tags' => ['bestseller'],
+                ],
+                [
+                    'nom' => 'PARACÉTAMOL 1000mg',
+                    'description' => 'Soulage la douleur et la fièvre',
+                    'prix' => 800,
+                    'ancien_prix' => null,
+                    'image' => 'https://via.placeholder.com/300x300?text=Paracétamol',
+                    'etat' => '',
+                    'note' => 4.9,
+                    'reviews' => 512,
                     'categorie' => 'hydrate',
+                    'tags' => ['bestseller'],
+                ],
+                [
+                    'nom' => 'VITAMINE D3 1000 UI',
+                    'description' => 'Maintien osseux et immunité',
+                    'prix' => 1500,
+                    'ancien_prix' => 1800,
+                    'image' => 'https://via.placeholder.com/300x300?text=Vitamine+D3',
+                    'etat' => 'nouveau',
+                    'note' => 4.7,
+                    'reviews' => 183,
+                    'categorie' => 'treat',
                     'tags' => ['promo'],
                 ],
                 [
-                    'nom' => 'VITAMIN C GLOW MASK',
-                    'description' => 'brightening treatment mask with 10% vitamin C',
-                    'prix' => 2400,
+                    'nom' => 'OMÉPRAZOLE 20mg',
+                    'description' => 'Réduction de l\'acidité gastrique',
+                    'prix' => 1800,
                     'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Vitamin+C+Mask',
+                    'image' => 'https://via.placeholder.com/300x300?text=Oméprazole',
                     'etat' => '',
                     'note' => 4.6,
-                    'reviews' => 215,
+                    'reviews' => 127,
                     'categorie' => 'mask',
                     'tags' => [],
                 ],
                 [
-                    'nom' => 'NIACINAMIDE NIGHT TREATMENT',
-                    'description' => 'overnight serum to minimize pores and even skin tone',
-                    'prix' => 2600,
-                    'ancien_prix' => 2900,
-                    'image' => 'https://via.placeholder.com/300x300?text=Niacinamide',
+                    'nom' => 'MAGNÉSIUM B6',
+                    'description' => 'Fatigue et stress',
+                    'prix' => 1400,
+                    'ancien_prix' => null,
+                    'image' => 'https://via.placeholder.com/300x300?text=Magnésium',
+                    'etat' => '',
+                    'note' => 4.5,
+                    'reviews' => 256,
+                    'categorie' => 'treat',
+                    'tags' => ['eco'],
+                ],
+                [
+                    'nom' => 'IBUPROFÈNE 400mg',
+                    'description' => 'Anti-inflammatoire non stéroïdien',
+                    'prix' => 900,
+                    'ancien_prix' => 1100,
+                    'image' => 'https://via.placeholder.com/300x300?text=Ibuprofène',
+                    'etat' => '',
+                    'note' => 4.4,
+                    'reviews' => 198,
+                    'categorie' => 'hydrate',
+                    'tags' => ['promo'],
+                ],
+                [
+                    'nom' => 'PROBIOTIQUES DIGESTIFS',
+                    'description' => 'Équilibre de la flore intestinale',
+                    'prix' => 2200,
+                    'ancien_prix' => null,
+                    'image' => 'https://via.placeholder.com/300x300?text=Probiotiques',
+                    'etat' => 'nouveau',
+                    'note' => 4.8,
+                    'reviews' => 97,
+                    'categorie' => 'mask',
+                    'tags' => ['nouveau', 'eco'],
+                ],
+                [
+                    'nom' => 'AZITHROMYCINE 250mg',
+                    'description' => 'Antibiotique à prise unique quotidienne',
+                    'prix' => 1600,
+                    'ancien_prix' => 1900,
+                    'image' => 'https://via.placeholder.com/300x300?text=Azithromycine',
                     'etat' => '',
                     'note' => 4.7,
-                    'reviews' => 183,
-                    'categorie' => 'treat',
+                    'reviews' => 143,
+                    'categorie' => 'cleanse',
                     'tags' => ['promo'],
                 ],
             ];
         @endphp
 
         @foreach ($produits as $produit)
-        <div class="col product-item" data-category="{{ $produit['categorie'] }}">
-            <div class="card card-product border-0 shadow-sm h-100">
+        <div class="col-md-3 product-item" data-category="{{ $produit['categorie'] }}">
+            <div class="card-product">
                 <div class="position-relative">
-                    <img src="{{ $produit['image'] }}" class="card-img-top" alt="{{ $produit['nom'] }}">
+                    <img src="{{ $produit['image'] }}" class="product-image" alt="{{ $produit['nom'] }}">
                     
                     <!-- Status Badges -->
-                    <div class="position-absolute top-0 start-0 p-2 d-flex flex-column">
+                    <div class="position-absolute top-0 start-0 p-2">
                         @if($produit['etat'] === 'nouveau')
-                            <span class="badge bg-dark product-badge mb-1">NOUVEAU</span>
+                            <span class="product-badge badge-new">NOUVEAU</span>
                         @endif
                         @if(in_array('bestseller', $produit['tags']))
-                            <span class="badge bg-danger product-badge mb-1">BEST-SELLER</span>
+                            <span class="product-badge badge-bestseller">BEST-SELLER</span>
                         @endif
                         @if(in_array('promo', $produit['tags']))
-                            <span class="badge bg-success product-badge mb-1">PROMO</span>
+                            <span class="product-badge badge-promo">PROMO</span>
                         @endif
                         @if(in_array('eco', $produit['tags']))
-                            <span class="badge bg-success product-badge" style="background-color:#2e7d32 !important;">ECO</span>
+                            <span class="product-badge badge-eco">ECO</span>
                         @endif
                     </div>
                     
                     <!-- Wishlist Button -->
-                    <div class="wishlist-icon shadow-sm">
+                    <div class="wishlist-icon">
                         <i class="far fa-heart"></i>
                     </div>
                 </div>
-                <div class="card-body text-center pt-4">
-                    <h5 class="fw-bold mb-1">{{ $produit['nom'] }}</h5>
-                    <p class="text-muted small mb-2">{{ $produit['description'] }}</p>
+                
+                <div class="card-body">
+                    <h5 class="fw-bold">{{ $produit['nom'] }}</h5>
+                    <p class="text-muted">{{ $produit['description'] }}</p>
                     
-                    <div class="mb-3">
+                    <div class="price">
                         @if($produit['ancien_prix'])
-                            <span class="original-price me-2">${{ $produit['ancien_prix'] / 100 }}</span>
-                            <span class="sale-price">${{ $produit['prix'] / 100 }}</span>
+                            <span class="original-price">{{ $produit['ancien_prix'] / 100 }}€</span>
+                            <span class="sale-price">{{ $produit['prix'] / 100 }}€</span>
                         @else
-                            <span class="fw-bold">${{ $produit['prix'] / 100 }}</span>
+                            <span>{{ $produit['prix'] / 100 }}€</span>
                         @endif
                     </div>
 
                     {{-- Étoiles --}}
                     @if($produit['note'] > 0)
-                        <div class="star-rating small mb-1">
+                        <div class="star-rating">
                             @for ($i = 1; $i <= 5; $i++)
                                 @if($i <= floor($produit['note']))
                                     <i class="fas fa-star"></i>
@@ -298,26 +499,23 @@
                                     <i class="far fa-star"></i>
                                 @endif
                             @endfor
-                            <span class="text-dark ms-1">{{ number_format($produit['note'], 1) }}</span>
                         </div>
-                        <p class="small text-muted mb-3">{{ $produit['reviews'] }} avis</p>
+                        <p class="review-count">{{ $produit['reviews'] }} avis</p>
                     @else
-                        <div class="text-muted small mb-3">
+                        <div class="star-rating text-muted">
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
                             <i class="far fa-star"></i>
-                            <span class="ms-1">Écrire un avis</span><br>
-                            0 avis
                         </div>
+                        <p class="review-count">Aucun avis</p>
                     @endif
                 </div>
-                <div class="card-footer bg-white border-0 pt-0">
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-dark btn-quick-add">Ajouter au panier</button>
-                        <button class="btn btn-outline-dark">Voir détails</button>
-                    </div>
+                
+                <div class="card-footer">
+                    <button class="btn btn-primary">AJOUTER AU PANIER</button>
+                    <button class="btn btn-outline">VOIR DÉTAILS</button>
                 </div>
             </div>
         </div>
@@ -325,33 +523,31 @@
     </div>
     
     <!-- Newsletter Section -->
-    <div class="row mt-5 pt-4 border-top">
-        <div class="col-lg-6 mx-auto text-center">
-            <h3 class="fw-bold mb-3">Restez informé</h3>
-            <p class="text-muted mb-4">Inscrivez-vous à notre newsletter pour recevoir des offres exclusives et des conseils beauté.</p>
-            <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Votre adresse email">
-                <button class="btn btn-dark px-4" type="button">S'inscrire</button>
-            </div>
-            <p class="small text-muted">En vous inscrivant, vous acceptez notre politique de confidentialité.</p>
+    <div class="newsletter">
+        <h3>Restez informé</h3>
+        <p>Inscrivez-vous à notre newsletter pour recevoir des offres exclusives et des conseils santé.</p>
+        <div class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Votre adresse email">
+            <button class="newsletter-button">S'INSCRIRE</button>
         </div>
+        <p class="small text-muted mt-2">En vous inscrivant, vous acceptez notre politique de confidentialité.</p>
     </div>
 </div>
 
-<!-- Featured Products Carousel -->
-<div class="bg-light py-5">
+<!-- Featured Products Section -->
+<div class="featured-section">
     <div class="container">
-        <h3 class="fw-bold text-center mb-4">Vous pourriez aussi aimer</h3>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <h3 class="featured-heading">Vous pourriez aussi aimer</h3>
+        <div class="row">
             @foreach(array_slice($produits, 0, 4) as $produit)
-            <div class="col">
-                <div class="card card-product border-0 shadow-sm h-100">
-                    <img src="{{ $produit['image'] }}" class="card-img-top" alt="{{ $produit['nom'] }}">
-                    <div class="card-body text-center">
+            <div class="col-md-3">
+                <div class="card-product">
+                    <img src="{{ $produit['image'] }}" class="product-image" alt="{{ $produit['nom'] }}">
+                    <div class="card-body">
                         <h6 class="fw-bold">{{ $produit['nom'] }}</h6>
                         <p class="text-muted small">{{ $produit['description'] }}</p>
-                        <p class="fw-bold">${{ $produit['prix'] / 100 }}</p>
-                        <button class="btn btn-sm btn-outline-dark">Voir produit</button>
+                        <p class="price">{{ $produit['prix'] / 100 }}€</p>
+                        <button class="btn btn-outline">VOIR PRODUIT</button>
                     </div>
                 </div>
             </div>
@@ -427,7 +623,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (heart.classList.contains('far')) {
                 heart.classList.remove('far');
                 heart.classList.add('fas');
-                heart.style.color = '#dc3545';
+                heart.style.color = '#e53e3e';
             } else {
                 heart.classList.remove('fas');
                 heart.classList.add('far');
@@ -438,3 +634,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endsection
+```
