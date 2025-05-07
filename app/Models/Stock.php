@@ -21,3 +21,4 @@ class Stock extends Model
         return $this->hasMany(Medicament::class);
     }
 }
+

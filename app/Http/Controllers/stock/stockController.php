@@ -9,7 +9,7 @@ class stockController extends Controller
 {
     public function index()
     {
-        return view('stock.index');
+        return view('stocks.index');
     }
 
     public function create()
