@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\commande;
+namespace App\Http\Controllers\stock;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class commandeControlleur extends Controller
+class stockControlleur extends Controller
 {
     //
 }
