@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil - Fagarou</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #2ecc71;
@@ -199,6 +200,105 @@
                 padding: 20px;
             }
         }
+        
+        .profile-glass {
+            background: rgba(255,255,255,0.85);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.18);
+            position: relative;
+            overflow: visible;
+        }
+        .profile-glass .profile-img {
+            position: absolute;
+            left: 50%;
+            top: -65px;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px #0002;
+            border: 6px solid #fff;
+            background: #e9f7ef;
+            object-fit: cover;
+            z-index: 2;
+        }
+        .profile-glass .profile-icon {
+            position: absolute;
+            left: 50%;
+            top: -65px;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: #27ae60;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            box-shadow: 0 4px 16px #0002;
+            border: 6px solid #fff;
+            z-index: 2;
+        }
+        .profile-glass .card-body {
+            margin-top: 70px;
+        }
+        .profile-glass .card-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #27ae60;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .profile-glass .list-group-item {
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            padding-left: 0;
+            padding-right: 0;
+            text-align: center;
+        }
+        .profile-glass .btn-logout {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            z-index: 3;
+            border-radius: 2rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            box-shadow: 0 2px 8px #0001;
+        }
+        @media (max-width: 767px) {
+            .profile-glass .btn-logout {
+                position: static;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            .profile-glass .card-body {
+                margin-top: 90px;
+            }
+        }
+        .profile-glass .btn-profile-edit {
+            position: absolute;
+            right: 7.5rem;
+            top: 2rem;
+            z-index: 3;
+            border-radius: 2rem;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            box-shadow: 0 2px 8px #0001;
+        }
+        @media (max-width: 767px) {
+            .profile-glass .btn-profile-edit {
+                position: static;
+                width: 100%;
+                margin-bottom: 1rem;
+                margin-top: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -213,69 +313,104 @@
     </nav>
     
     <div class="container">
-        <div class="welcome-card">
-            <h1 class="welcome-title">Bonjour, {{ $user->prenom ?? '' }} {{ $user->name }}!</h1>
-            <p class="welcome-text">Vous êtes maintenant connecté à votre compte Fagarou.</p>
-        </div>
-        
-        <div class="profile-card">
-            <div class="profile-header">
-                <i class="fas fa-user-circle"></i> Votre profil
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="welcome-title">Bonjour, {{ $user->prenom ?? '' }} {{ $user->name }}!</h1>
+                <p class="welcome-text">Vous êtes maintenant connecté à votre compte Fagarou.</p>
             </div>
-            
-            @if($user->photo)
-                <img src="{{ $user->photo }}" alt="Photo de profil" class="profile-photo">
-            @else
-                <div class="profile-no-photo">
-                    <i class="fas fa-user"></i>
+            <a href="{{ route('profile') }}" class="btn btn-outline-primary btn-lg" title="Mes informations">
+                <i class="fas fa-user-edit"></i> Mes informations
+            </a>
+        </div>
+
+        <!-- Section Résumé rapide / Suivi de santé -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <div class="card text-center shadow border-0 h-100">
+                    <div class="card-body">
+                        <i class="fas fa-file-medical fa-2x text-success mb-2"></i>
+                        <h5 class="card-title">Ordonnances</h5>
+                        <p class="card-text">Consultez et gérez vos ordonnances en un clic.</p>
+                        <a href="#" class="btn btn-success btn-sm">Voir mes ordonnances</a>
+                    </div>
                 </div>
-            @endif
-            
-            <div class="profile-body">
-                <div class="profile-info">
-                    <div class="info-label">Nom:</div>
-                    <div class="info-value">{{ $user->name }}</div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card text-center shadow border-0 h-100">
+                    <div class="card-body">
+                        <i class="fas fa-bell fa-2x text-warning mb-2"></i>
+                        <h5 class="card-title">Notifications</h5>
+                        <p class="card-text">Soyez informé des nouveautés et rappels importants.</p>
+                        <a href="#" class="btn btn-warning btn-sm text-white">Voir mes notifications</a>
+                    </div>
                 </div>
-                
-                @if($user->prenom)
-                <div class="profile-info">
-                    <div class="info-label">Prénom:</div>
-                    <div class="info-value">{{ $user->prenom }}</div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card text-center shadow border-0 h-100">
+                    <div class="card-body">
+                        <i class="fas fa-heartbeat fa-2x text-danger mb-2"></i>
+                        <h5 class="card-title">Conseil santé</h5>
+                        <p class="card-text">Découvrez chaque jour un conseil pour votre bien-être.</p>
+                        <a href="#" class="btn btn-danger btn-sm">Voir le conseil</a>
+                    </div>
                 </div>
-                @endif
-                
-                @if($user->date_naissance)
-                <div class="profile-info">
-                    <div class="info-label">Date de naissance:</div>
-                    <div class="info-value">{{ \Carbon\Carbon::parse($user->date_naissance)->format('d/m/Y') }}</div>
-                </div>
-                @endif
-                
-                @if($user->adresse)
-                <div class="profile-info">
-                    <div class="info-label">Adresse:</div>
-                    <div class="info-value">{{ $user->adresse }}</div>
-                </div>
-                @endif
-                
-                @if($user->telephone)
-                <div class="profile-info">
-                    <div class="info-label">Téléphone:</div>
-                    <div class="info-value">{{ $user->telephone }}</div>
-                </div>
-                @endif
-                
-                <div class="profile-info">
-                    <div class="info-label">Email:</div>
-                    <div class="info-value">{{ $user->email }}</div>
-                </div>
-                
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Se déconnecter
-                    </button>
+            </div>
+        </div>
+
+        <!-- Actions rapides -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <a href="#" class="btn btn-success btn-lg w-100 d-flex flex-column align-items-center justify-content-center py-4 shadow-sm">
+                    <i class="fas fa-file-upload fa-2x mb-2"></i>
+                    Importer votre ordonnance
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="#" class="btn btn-outline-success btn-lg w-100 d-flex flex-column align-items-center justify-content-center py-4 shadow-sm">
+                    <i class="fas fa-search-location fa-2x mb-2"></i>
+                    Rechercher une pharmacie
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="#" class="btn btn-outline-primary btn-lg w-100 d-flex flex-column align-items-center justify-content-center py-4 shadow-sm">
+                    <i class="fas fa-file-medical-alt fa-2x mb-2"></i>
+                    Mes ordonnances
+                </a>
+            </div>
+        </div>
+
+        <!-- Conseil santé du jour -->
+        <div class="alert alert-success mb-4" role="alert" style="font-size: 1.2rem;">
+            <strong>Conseil du jour :</strong> Buvez beaucoup d'eau pour rester hydraté !
+        </div>
+
+        <!-- Pharmacies proches -->
+        <div class="card mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="fas fa-map-marker-alt text-success"></i> Pharmacies proches de chez vous</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Pharmacie Touba <span class="badge bg-success">Ouverte</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Pharmacie Médina <span class="badge bg-danger">Fermée</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Localiser une pharmacie -->
+        <div class="card mb-4 shadow border-0">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-map-marker-alt text-success"></i> Localiser une pharmacie</span>
+                <a href="#" id="btn-pharmacies-proches" class="btn btn-outline-success btn-sm">Voir toutes les pharmacies</a>
+            </div>
+            <div class="card-body">
+                <form class="mb-3 d-flex" style="max-width: 400px;">
+                    <input type="text" class="form-control me-2" placeholder="Rechercher une pharmacie ou une adresse...">
+                    <button class="btn btn-success" type="submit"><i class="fas fa-search-location"></i></button>
                 </form>
+                <div id="map" style="height: 300px; width: 100%; border-radius: 10px; overflow: hidden;"></div>
             </div>
         </div>
     </div>
@@ -285,6 +420,40 @@
             // Animations and interactions could be added here
             console.log('Page chargée avec succès');
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Ajout des liens Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialisation de la carte
+        var map = L.map('map').setView([14.6928, -17.4467], 13); // Dakar par défaut
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        // Exemple de marker pharmacie
+        L.marker([14.6928, -17.4467]).addTo(map)
+            .bindPopup('Pharmacie Touba').openPopup();
+        L.marker([14.7000, -17.4500]).addTo(map)
+            .bindPopup('Pharmacie Médina');
+        var btn = document.getElementById('btn-pharmacies-proches');
+        if(btn){
+            btn.addEventListener('click', function(e){
+                e.preventDefault();
+                if(navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        window.location.href = '/pharmacies-proches?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude;
+                    }, function(){
+                        alert('Impossible de récupérer votre position.');
+                    });
+                } else {
+                    alert('La géolocalisation n\'est pas supportée par votre navigateur.');
+                }
+            });
+        }
+    });
     </script>
 </body>
 </html>
