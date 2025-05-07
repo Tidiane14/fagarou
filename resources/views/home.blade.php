@@ -428,39 +428,8 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var map = L.map('map').setView([{{ $lat }}, {{ $lng }}], 13);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
-
-            var markers = [];
-            // Marqueur position utilisateur (ou par défaut)
-            var userMarker = L.marker([{{ $lat }}, {{ $lng }}], {icon: L.icon({iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png', iconSize: [32,32], iconAnchor: [16,32]})})
-                .addTo(map)
-                .bindPopup('Vous êtes ici');
-            markers.push(userMarker);
-
-            // Marqueurs pharmacies
-            @foreach($pharmacies as $pharma)
-                var marker = L.marker([{{ $pharma->latitude }}, {{ $pharma->longitude }}]).addTo(map)
-                    .bindPopup("{{ addslashes($pharma->nom) }}<br>{{ addslashes($pharma->adresse) }}<br>{{ number_format($pharma->distance ?? 0, 2) }} km");
-                markers.push(marker);
-            @endforeach
-
-            // Recadrer la carte sur tous les marqueurs (si au moins une pharmacie)
-            if (markers.length > 1) {
-                var group = new L.featureGroup(markers);
-                map.fitBounds(group.getBounds().pad(0.2));
-            } else {
-                map.setView([{{ $lat }}, {{ $lng }}], 13);
-            }
-        });
-
-        document.getElementById('import-file').addEventListener('change', function() {
-            if(this.files.length > 0) {
-                document.getElementById('import-form').submit();
-            }
+            // Animations and interactions could be added here
+            console.log('Page chargée avec succès');
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

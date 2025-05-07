@@ -17,15 +17,15 @@ class Pharmacie extends Model
     ];
     public function administrateur()
     {
-        return $this->hasMany(Administrateur::class,'id_administarteur');
+        return $this->hasMany(Administrateur::class);
     }
     public function stock()
     {
-        return $this->hasMany(Stock::class,'id_stock');
+        return $this->hasMany(Stock::class);
     }
     public function commande()
     {
-        return $this->hasMany(Commande::class,'id_comande');
+        return $this->hasMany(Commande::class);
     }
    
 }
