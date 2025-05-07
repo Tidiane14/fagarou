@@ -7,7 +7,7 @@
         <div class="logo-container">
             <img src="{{ asset('images/bb.jpg') }}" alt="Fagarou Logo" class="logo">
             <span class="tagline">Ma Santé Fagarou</span>
-            <a href="{{ route('login') }}" class="close-btn">×</a>
+            <a href="{{ route('login') }}" class="close-btn" title="Retour à la connexion">×</a>
         </div>
         
         <div class="welcome-text">
@@ -107,12 +107,14 @@
                 <button type="submit" class="btn btn-primary">
                     S'INSCRIRE
                 </button>
-                
-                <div class="text-center" style="margin-top: 15px;">
-                    <p>Vous avez déjà un compte? <a href="{{ route('login') }}" style="color: var(--primary-color); text-decoration: none;">Se connecter</a></p>
-                </div>
             </div>
         </form>
+        <div class="text-center" style="margin-top: 15px;">
+            <p>Vous avez déjà un compte ? <a href="{{ route('login') }}" style="color: var(--primary-color); text-decoration: none;">Se connecter</a></p>
+        </div>
     </div>
 </div>
+
 @endsection
+
+

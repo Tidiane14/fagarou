@@ -23,7 +23,7 @@ class LivreursRequest extends FormRequest
     {
         return [
             'nom' => 'le nom est obligatoire',
-            'prenom' => 'le prenom est bligatoire',
+            'prenom' => 'le prenom est obligatoire',
             'date_naissance' => 'la date de naissance est obligatoire',
             'adresse' => 'l\'adresse est obligatoire',
             'telephone' => 'le telephone est obligatoire',
