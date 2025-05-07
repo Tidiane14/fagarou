@@ -29,7 +29,7 @@
                         <i class="fas fa-truck-fast text-green-600 text-4xl"></i>
                     </div>
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Devenez Livreur Partenaire</h1>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Devenez un Livreur, un Partenaire</h1>
                 <p class="text-gray-600">Rejoignez notre réseau de livreurs et commencez à gagner de l'argent dès aujourd'hui</p>
             </div>
 
