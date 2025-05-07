@@ -5,9 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\medicament\MedicamentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+
+
+use App\Http\Controllers\livraisonController;
+
 use App\Http\Controllers\Auth\RegisterController;       
 use App\Http\Controllers\stock\stockController;
 use App\Models\Stock;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -52,6 +57,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
+
+// Route page livraison
+Route::get('/livraison', [livraisonController::class, 'showLivraison'])->name('livraison');
+
 Route::get('/stock', [stockController::class, 'index'])->name('stocks.index');
 //Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
@@ -63,5 +72,6 @@ Route::get('/ordonnance ', function () {
 Route::get('/administrateur', function () {
     return view('admin.administrateur');
 })->name('login');
+
 
 
