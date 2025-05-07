@@ -6,12 +6,17 @@ use App\Http\Controllers\medicament\MedicamentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\LivreurController;
+
+
 
 use App\Http\Controllers\livraisonController;
 
-use App\Http\Controllers\Auth\RegisterController;       
+     
 use App\Http\Controllers\stock\stockController;
 use App\Models\Stock;
+
 
 
 // Route::get('/', function () {
@@ -56,6 +61,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 // Route d'accueil après connexion
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+// Routes pour livreur
+Route::get('/livreur/create', [LivreurController::class, 'create'])->name('livreur.create');
+Route::post('/livreur/store', [LivreurController::class, 'store'])->name('livreur.store');
 
 
 // Route page livraison
