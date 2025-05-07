@@ -24,7 +24,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Routes d'inscription (GET)
-Route::get('/registerPage', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 // Routes d'inscription (POST)
 Route::post('/register', [RegisterController::class, 'register']);
 
@@ -42,5 +42,5 @@ Route::get('/ordonnance ', function () {
 
 Route::get('/administrateur', function () {
     return view('admin.administrateur');
-})->name('login');
+})->name('admin');
 

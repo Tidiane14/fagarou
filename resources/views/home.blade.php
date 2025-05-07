@@ -281,7 +281,7 @@
     </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() { 
             // Animations and interactions could be added here
             console.log('Page chargée avec succès');
         });
