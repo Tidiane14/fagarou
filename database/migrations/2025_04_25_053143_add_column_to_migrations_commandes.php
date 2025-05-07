@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('migrations_commandes', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('id_pharmacie');
-            $table->foreign('id_pharmacie')->references('id')->on('pharmacies')->onDelete('cascade');
+           /*  $table->unsignedBigInteger('id_pharmacie');
+            $table->foreign('id_pharmacie')->references('id')->on('pharmacies')->onDelete('cascade'); */
         });
     }
 
