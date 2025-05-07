@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('telephone');
             $table->string('email')->unique();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->timestamps();
         });
     }

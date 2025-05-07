@@ -12,6 +12,8 @@ class Pharmacie extends Model
         'adresse',
         'telephone',
         'email',
+        'latitude',
+        'longitude',
     ];
     public function administrateur()
     {

@@ -16,6 +16,9 @@ use App\Http\Controllers\livraisonController;
      
 use App\Http\Controllers\stock\stockController;
 use App\Models\Stock;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Pharmacie;
 
 
 
@@ -80,7 +83,31 @@ Route::get('/ordonnance ', function () {
 
 Route::get('/administrateur', function () {
     return view('admin.administrateur');
-})->name('login');
+})->name('admin');
+
+Route::get('/profile', function () {
+    $user = Auth::user();
+    return view('profile', compact('user'));
+})->name('profile')->middleware('auth');
+
+Route::get('/pharmacies-proches', function (Request $request) {
+    $lat = $request->query('lat', 14.6928);
+    $lng = $request->query('lng', -17.4467);
+    $radius = 10; // rayon en km
+
+    $pharmacies = Pharmacie::selectRaw(
+        '*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+        [$lat, $lng, $lat]
+    )
+    ->whereNotNull('latitude')
+    ->whereNotNull('longitude')
+    ->having('distance', '<', $radius)
+    ->orderBy('distance')
+    ->limit(20)
+    ->get();
+
+    return view('pharmacies-proches', compact('pharmacies', 'lat', 'lng'));
+})->name('pharmacies.proches')->middleware('auth');
 
 
 
