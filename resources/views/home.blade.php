@@ -323,6 +323,10 @@
             </a>
         </div>
 
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         <!-- Section Résumé rapide / Suivi de santé -->
         <div class="row mb-4">
             <div class="col-md-4 mb-3">
@@ -360,10 +364,14 @@
         <!-- Actions rapides -->
         <div class="row mb-4">
             <div class="col-md-4 mb-3">
-                <a href="#" class="btn btn-success btn-lg w-100 d-flex flex-column align-items-center justify-content-center py-4 shadow-sm">
-                    <i class="fas fa-file-upload fa-2x mb-2"></i>
-                    Importer votre ordonnance
-                </a>
+                <form action="{{ route('ordonnance.importer') }}" method="POST" enctype="multipart/form-data" class="mb-3" id="import-form">
+                    @csrf
+                    <input type="file" name="ordonnance" id="import-file" class="d-none" accept=".pdf,.jpg,.jpeg,.png" required>
+                    <button type="button" class="btn btn-success btn-lg w-100 d-flex flex-column align-items-center justify-content-center py-4 shadow-sm" onclick="document.getElementById('import-file').click();">
+                        <i class="fas fa-file-upload fa-2x mb-2"></i>
+                        Importer votre ordonnance
+                    </button>
+                </form>
             </div>
             <div class="col-md-4 mb-3">
                 <a href="#" class="btn btn-outline-success btn-lg w-100 d-flex flex-column align-items-center justify-content-center py-4 shadow-sm">
@@ -406,54 +414,58 @@
                 <a href="#" id="btn-pharmacies-proches" class="btn btn-outline-success btn-sm">Voir toutes les pharmacies</a>
             </div>
             <div class="card-body">
-                <form class="mb-3 d-flex" style="max-width: 400px;">
-                    <input type="text" class="form-control me-2" placeholder="Rechercher une pharmacie ou une adresse...">
+                <form class="mb-3 d-flex" style="max-width: 400px;" method="GET" action="{{ route('home') }}">
+                    <input type="text" name="q" class="form-control me-2" placeholder="Rechercher une pharmacie ou une ville..." value="{{ request('q') }}">
                     <button class="btn btn-success" type="submit"><i class="fas fa-search-location"></i></button>
                 </form>
                 <div id="map" style="height: 300px; width: 100%; border-radius: 10px; overflow: hidden;"></div>
             </div>
         </div>
+        @if(isset($pharmacies) && $pharmacies->isEmpty())
+            <div class="alert alert-warning mt-3">Aucune pharmacie trouvée pour votre recherche.</div>
+        @endif
     </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Animations and interactions could be added here
-            console.log('Page chargée avec succès');
+            var map = L.map('map').setView([{{ $lat }}, {{ $lng }}], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            var markers = [];
+            // Marqueur position utilisateur (ou par défaut)
+            var userMarker = L.marker([{{ $lat }}, {{ $lng }}], {icon: L.icon({iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png', iconSize: [32,32], iconAnchor: [16,32]})})
+                .addTo(map)
+                .bindPopup('Vous êtes ici');
+            markers.push(userMarker);
+
+            // Marqueurs pharmacies
+            @foreach($pharmacies as $pharma)
+                var marker = L.marker([{{ $pharma->latitude }}, {{ $pharma->longitude }}]).addTo(map)
+                    .bindPopup("{{ addslashes($pharma->nom) }}<br>{{ addslashes($pharma->adresse) }}<br>{{ number_format($pharma->distance ?? 0, 2) }} km");
+                markers.push(marker);
+            @endforeach
+
+            // Recadrer la carte sur tous les marqueurs (si au moins une pharmacie)
+            if (markers.length > 1) {
+                var group = new L.featureGroup(markers);
+                map.fitBounds(group.getBounds().pad(0.2));
+            } else {
+                map.setView([{{ $lat }}, {{ $lng }}], 13);
+            }
+        });
+
+        document.getElementById('import-file').addEventListener('change', function() {
+            if(this.files.length > 0) {
+                document.getElementById('import-form').submit();
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Ajout des liens Leaflet.js -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialisation de la carte
-        var map = L.map('map').setView([14.6928, -17.4467], 13); // Dakar par défaut
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-        // Exemple de marker pharmacie
-        L.marker([14.6928, -17.4467]).addTo(map)
-            .bindPopup('Pharmacie Touba').openPopup();
-        L.marker([14.7000, -17.4500]).addTo(map)
-            .bindPopup('Pharmacie Médina');
-        var btn = document.getElementById('btn-pharmacies-proches');
-        if(btn){
-            btn.addEventListener('click', function(e){
-                e.preventDefault();
-                if(navigator.geolocation){
-                    navigator.geolocation.getCurrentPosition(function(position){
-                        window.location.href = '/pharmacies-proches?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude;
-                    }, function(){
-                        alert('Impossible de récupérer votre position.');
-                    });
-                } else {
-                    alert('La géolocalisation n\'est pas supportée par votre navigateur.');
-                }
-            });
-        }
-    });
-    </script>
 </body>
 </html>
