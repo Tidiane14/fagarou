@@ -80,7 +80,7 @@ Route::get('/ordonnance ', function () {
 
 Route::get('/administrateur', function () {
     return view('admin.administrateur');
-})->name('login');
+})->name('admin');
 
 
 
