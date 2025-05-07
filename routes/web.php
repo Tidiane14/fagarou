@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;       
+use App\Http\Controllers\stock\stockController;
+use App\Models\Stock;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -28,3 +30,5 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Route d'accueil après connexion
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+Route::get('/stock', [stockController::class, 'index'])->name('stocks.index');
