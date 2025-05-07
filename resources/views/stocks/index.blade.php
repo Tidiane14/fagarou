@@ -19,7 +19,7 @@
     <!-- Barre de recherche et filtres -->
     <div class="card mb-4">
         <div class="card-body">
-            <form action="{{ route('medicaments.index') }}" method="GET" class="row g-3">
+            <form action="{{ route('medicaments') }}" method="GET" class="row g-3">
                 <div class="col-md-6">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Rechercher un médicament..." value="{{ request('search') }}">
@@ -111,7 +111,7 @@
                                 </td>
                                 <td class="text-end">
                                     <div class="btn-group">
-                                        <a href="{{ route('medicaments.show', $medicament->id) }}" class="btn btn-sm btn-outline-primary">
+                                        <a href="{{ route('medicaments', $medicament->id) }}" class="btn btn-sm btn-outline-primary">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="{{ route('medicaments.edit', $medicament->id) }}" class="btn btn-sm btn-outline-secondary">
@@ -186,7 +186,7 @@
 <div class="modal fade" id="addStockModal" tabindex="-1" aria-labelledby="addStockModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('medicaments.add-stock') }}" method="POST">
+            <form action="{{ route('medicaments') }}" method="POST">
                 @csrf
                 <input type="hidden" name="medicament_id" id="add_medicament_id">
                 <div class="modal-header">
@@ -221,7 +221,7 @@
 <div class="modal fade" id="removeStockModal" tabindex="-1" aria-labelledby="removeStockModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('medicaments.remove-stock') }}" method="POST">
+            <form action="{{ route('medicaments') }}" method="POST">
                 @csrf
                 <input type="hidden" name="medicament_id" id="remove_medicament_id">
                 <div class="modal-header">
