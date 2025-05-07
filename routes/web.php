@@ -119,3 +119,73 @@ Route::get('/administrateur', function () {
     return view('admin.administrateur');
 })->name('admin');
 
+
+Route::get('/profile', function () {
+    $user = Auth::user();
+    return view('profile', compact('user'));
+})->name('profile')->middleware('auth');
+
+Route::get('/pharmacies-proches', function (Request $request) {
+    $lat = $request->query('lat', 14.6928);
+    $lng = $request->query('lng', -17.4467);
+    $radius = 10; // rayon en km
+
+    $pharmacies = Pharmacie::selectRaw(
+        '*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+        [$lat, $lng, $lat]
+    )
+    ->whereNotNull('latitude')
+    ->whereNotNull('longitude')
+    ->having('distance', '<', $radius)
+    ->orderBy('distance')
+    ->limit(20)
+    ->get();
+
+    return view('pharmacies-proches', compact('pharmacies', 'lat', 'lng'));
+})->name('pharmacies.proches')->middleware('auth');
+
+Route::get('/api/pharmacies-proches', function (Request $request) {
+    $lat = $request->query('lat', 14.6928);
+    $lng = $request->query('lng', -17.4467);
+    $radius = 10; // rayon en km
+
+    $pharmacies = Pharmacie::selectRaw(
+        '*, (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',
+        [$lat, $lng, $lat]
+    )
+    ->whereNotNull('latitude')
+    ->whereNotNull('longitude')
+    ->having('distance', '<', $radius)
+    ->orderBy('distance')
+    ->limit(20)
+    ->get();
+
+    return response()->json($pharmacies);
+});
+
+Route::get('/osm-proxy', function(Request $request) {
+    $q = $request->query('q', '');
+    $country = $request->query('country', 'Senegal');
+    $url = 'https://nominatim.openstreetmap.org/search';
+    $response = Http::withHeaders([
+        'User-Agent' => 'FagarouApp/1.0 (contact@tonsite.com)'
+    ])->get($url, [
+        'country' => $country,
+        'q' => $q,
+        'format' => 'json',
+        'limit' => 50
+    ]);
+    return $response->json();
+});
+
+Route::post('/importer-ordonnance', function(Request $request) {
+    $request->validate([
+        'ordonnance' => 'required|file|mimes:pdf,jpg,jpeg,png|max:4096'
+    ]);
+    $path = $request->file('ordonnance')->store('ordonnances', 'public');
+    // Ici tu peux enregistrer le chemin dans la base, notifier l'utilisateur, etc.
+    return back()->with('success', 'Ordonnance importée avec succès !');
+})->name('ordonnance.importer')->middleware('auth');
+
+
+
