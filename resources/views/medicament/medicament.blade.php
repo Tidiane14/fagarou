@@ -1,4 +1,3 @@
-```php
 @extends('layouts.app')
 
 @section('styles')
@@ -23,7 +22,7 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transition: transform 0.3s, box-shadow 0.3s;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
     
     .card-product:hover {
@@ -352,7 +351,7 @@
                     'description' => 'Antibiotique à large spectre',
                     'prix' => 1200,
                     'ancien_prix' => 1500,
-                    'image' => 'https://via.placeholder.com/300x300?text=Amoxicilline',
+                    'image' => asset('images/download__3_-removebg-preview.png'),
                     'etat' => '',
                     'note' => 4.8,
                     'reviews' => 324,
@@ -364,7 +363,7 @@
                     'description' => 'Soulage la douleur et la fièvre',
                     'prix' => 800,
                     'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Paracétamol',
+                    'image' => asset('images/download__1_-removebg-preview.png'),
                     'etat' => '',
                     'note' => 4.9,
                     'reviews' => 512,
@@ -376,7 +375,7 @@
                     'description' => 'Maintien osseux et immunité',
                     'prix' => 1500,
                     'ancien_prix' => 1800,
-                    'image' => 'https://via.placeholder.com/300x300?text=Vitamine+D3',
+                    'image' => asset('images/download__2_-removebg-preview.png'),
                     'etat' => 'nouveau',
                     'note' => 4.7,
                     'reviews' => 183,
@@ -388,7 +387,7 @@
                     'description' => 'Réduction de l\'acidité gastrique',
                     'prix' => 1800,
                     'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Oméprazole',
+                    'image' => asset('images/download__4_-removebg-preview.png'),
                     'etat' => '',
                     'note' => 4.6,
                     'reviews' => 127,
@@ -400,7 +399,7 @@
                     'description' => 'Fatigue et stress',
                     'prix' => 1400,
                     'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Magnésium',
+                    'image' => asset('images/download__5_-removebg-preview.png'),
                     'etat' => '',
                     'note' => 4.5,
                     'reviews' => 256,
@@ -412,7 +411,7 @@
                     'description' => 'Anti-inflammatoire non stéroïdien',
                     'prix' => 900,
                     'ancien_prix' => 1100,
-                    'image' => 'https://via.placeholder.com/300x300?text=Ibuprofène',
+                    'image' => asset('images/download__6_-removebg-preview.png'),
                     'etat' => '',
                     'note' => 4.4,
                     'reviews' => 198,
@@ -424,7 +423,7 @@
                     'description' => 'Équilibre de la flore intestinale',
                     'prix' => 2200,
                     'ancien_prix' => null,
-                    'image' => 'https://via.placeholder.com/300x300?text=Probiotiques',
+                    'image' => asset('images/download__7_-removebg-preview.png'),
                     'etat' => 'nouveau',
                     'note' => 4.8,
                     'reviews' => 97,
@@ -436,7 +435,7 @@
                     'description' => 'Antibiotique à prise unique quotidienne',
                     'prix' => 1600,
                     'ancien_prix' => 1900,
-                    'image' => 'https://via.placeholder.com/300x300?text=Azithromycine',
+                    'image' => asset('images/download__8_-removebg-preview.png'),
                     'etat' => '',
                     'note' => 4.7,
                     'reviews' => 143,
